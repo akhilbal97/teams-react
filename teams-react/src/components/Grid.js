@@ -1,32 +1,73 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import GridItem from './GridItem.js';
+import React from "react";
+import Grid from "@material-ui/core/Grid";
+import GridItem from "./GridItem.js";
+import "./Grid.css";
+import axios from "axios";
 
+const teamsurl = "https://polar-ravine-70615.herokuapp.com/";
 
-const useStyles = makeStyles(theme => ({
-    root: {
-      flexGrow: 1,
-      marginTop: 60,
-      marginBottom: 100,
-      maxWidth: 1000,
-      flexDirection: 'row',
-      marginLeft: 10.0
+export default class extends React.Component {
+  constructor(props) {
+    // const classes = useStyles();
+    super(props);
+    this.state = {
+      teams: [],
+      employees: [],
+      projects: [],
+      loading: false,
+      errored: false
+    };
+  }
+
+  componentDidMount() {
+    this.setState({ loading: true });
+    var that = this;
+    axios
+      .all([
+        axios.get(teamsurl + "teams-raw"),
+        axios.get(teamsurl + "employees"),
+        axios.get(teamsurl + "projects")
+      ])
+      .then(
+        axios.spread(function(teams, emp, proj) {
+          that.setState({
+            teams: teams.data,
+            employees: emp.data,
+            projects: proj.data,
+            loading: false
+          });
+        })
+      )
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  render() {
+    if (this.state.errored) {
+      return <div>alert(this.state.errored);</div>;
     }
-  }));
-
-export default function CentredGrid(props){
-    const classes = useStyles();
-    return(
-        <div className={classes.root}>
-            <Grid container spacing={3} justify='center'>
-                <GridItem title="Team 1"/>
-                <GridItem title="Team 2"/>
-                <GridItem title="Team 3"/>
-                <GridItem title="Team 4"/>
-                <GridItem title="Team 5"/>
-                <GridItem title="Team 6"/>
-            </Grid>
+    if (this.state.loading) {
+      return (
+        <div>
+          <p>Loading...</p>
         </div>
-    )
+      );
+    }
+
+    return (
+      <div className="grid-root">
+        <Grid container spacing={5} justify="center">
+          {this.state.teams.map(team => (
+            <GridItem
+              key={team._id}
+              Team={team}
+              Employees={this.state.employees}
+              Projects={this.state.projects}
+            />
+          ))}
+        </Grid>
+      </div>
+    );
+  }
 }

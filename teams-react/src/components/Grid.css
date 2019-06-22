@@ -1,0 +1,8 @@
+.grid-root {
+  flex-grow: 1 !important;
+  margin-top: 60 !important;
+  margin-bottom: 100 !important;
+  max-width: 800 !important;
+  flex-direction: "row" !important;
+  margin-left: 100 !important;
+}
