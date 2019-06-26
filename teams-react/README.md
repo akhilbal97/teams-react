@@ -2,6 +2,9 @@
 
 This project is done using React.
 
+## Screenshot
+![Capture](https://user-images.githubusercontent.com/46607923/60151503-fb6d7580-97aa-11e9-90fe-046721fa1483.JPG)
+
 ## Install Dependencies
 
 Run the command: 'npm install' on the cl
@@ -35,6 +38,6 @@ npm run eslint
 npm run prettier
 ```   
 ## Bugs
-
-- Cannot update the values in teams-api
+ Save button not configured
+ 
 
