@@ -37,7 +37,7 @@ npm run eslint
 ```
 npm run prettier
 ```   
-## Bugs
+## Note
  Save button not configured
  
 
