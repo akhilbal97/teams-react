@@ -33,7 +33,7 @@ npm install --save material-ui
 npm run eslint
 ```   
 
--prettier
+- prettier
 ```
 npm run prettier
 ```   
