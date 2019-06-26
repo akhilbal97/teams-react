@@ -70,22 +70,22 @@ export default function GridItems(props) {
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : null;
 
-  function handleSave(event) {
-    setAnchorEl(event.currentTarget);
-    const saveData = async () => {
-      await Axios.put(
-        "https://polar-ravine-70615.herokuapp.com/team/" + props.Team._id,
-        {
-          Projects: projects,
-          Employees: employees,
-          TeamLead: team.TeamLead
-        }
-      )
-        .then(res => setPopRes(res.data.message))
-        .catch(err => alert(err.message));
-    };
-    saveData();
-  }
+  // function handleSave(event) {
+  //   setAnchorEl(event.currentTarget);
+  //   const saveData = async () => {
+  //     await Axios.put(
+  //       "https://polar-ravine-70615.herokuapp.com/team/" + props.Team._id,
+  //       {
+  //         Projects: team.Projects,
+  //         Employees: team.Employees,
+  //         TeamLead: team.TeamLead
+  //       }
+  //     )
+  //       .then(res => setPopRes(res.data.message))
+  //       .catch(err => alert(err.message));
+  //   };
+  //   saveData();
+  // }
 
   const classes = useStyles();
   return (
@@ -98,7 +98,6 @@ export default function GridItems(props) {
               <Button
                 variant="contained"
                 size="small"
-                onClick={handleSave}
                 className={classes.button}
               >
                 <SaveIcon

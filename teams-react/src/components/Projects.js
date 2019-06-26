@@ -9,12 +9,13 @@ export default class extends Component {
     super(props);
     this.state = {
       projects: this.props.projects,
-      selectedOptions: []
+      selectedOptions: this.props.team.Projects
     };
   }
 
   handleSelectedChanged = selectedOptions => {
     this.setState({ selectedOptions });
+    this.props.team.Projects = {selectedOptions};
   };
   handleUnselectItem = removedVal => () =>
     this.setState({

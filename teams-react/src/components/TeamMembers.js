@@ -8,12 +8,13 @@ export default class extends Component {
     super(props);
     this.state = {
       employees: this.props.employees,
-      selectedOptions: []
+      selectedOptions: this.props.team.Employees
     };
   }
 
   handleSelectedChanged = selectedOptions => {
     this.setState({ selectedOptions });
+    this.props.team.Employees = {selectedOptions};
   };
   handleUnselectItem = removedVal => () =>
     this.setState({
